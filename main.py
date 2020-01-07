@@ -1,5 +1,6 @@
 import os 
 from location_info import *
+from draw import * 
 
 def read_file(ip_list_file:str):  
    """
@@ -33,7 +34,11 @@ def main():
       if ip not in ip_dict: 
          ip_dict[ip] = {'address': get_address(ip), 'location': get_log_lat(ip)}
 
-   print(ip_dict) 
+   location = [] 
+   for ip in ip_dict: 
+      location.append(ip_dict[ip]['location'])
+
+   draw_map(location) 
 
 if __name__ == '__main__': 
     main()
