@@ -1,4 +1,5 @@
 import os 
+from create_html_file import * 
 from location_info import *
 from draw import * 
 
@@ -38,7 +39,10 @@ def main():
    for ip in ip_dict: 
       location.append(ip_dict[ip]['location'])
 
-   draw_map(location) 
+   map_file = draw_map(location)
+   if not map_file: 
+      exit(1) 
+   print(map_file) 
 
 if __name__ == '__main__': 
     main()
