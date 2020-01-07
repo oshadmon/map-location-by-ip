@@ -1,4 +1,6 @@
 import os 
+import shutil 
+
 from create_html_file import * 
 from location_info import *
 from draw import * 
@@ -62,6 +64,21 @@ def merge_files(map_file:str, file_name:str):
    except Exception as e: 
       print('Failed to open file %s [Error: %s]' % (file_name, e))
       return False 
+
+   try: 
+      shutil.copy(file_name, '/var/www/html')
+   except Exception as e: 
+      print('Failed to copy file into /var/www/html [Error: %s]' % e)
+      return False 
+
+   try: 
+      os.remove(map_file)
+   except Exception as e: 
+      print('Failed to remove %s [Error: %s]' % (map_file, e))
+      return False 
+
+   print('Map Generated in: %s' % file_name) 
+   return True 
 
 def main(): 
    ip_dict = {} 

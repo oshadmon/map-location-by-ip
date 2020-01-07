@@ -1,0 +1,52 @@
+<html> 
+	<h1 align="center">Heatmap based on IPs</h1>
+	<p align=left><b>45.79.66.203</b> - Fremont, California US</p>
+	<p align=left><b>198.58.117.105</b> - Dallas, Texas US</p>
+	<p align=left><b>40.70.71.144</b> - Boydton, Virginia US</p>
+	<p align=left><b>185.60.170.221</b> - Israel</p>
+	<p align=left><b>45.79.96.35</b> - Fremont, California US</p>
+	<p align=left><b>45.79.210.232</b> - Atlanta, Georgia US</p>
+<head>
+<meta name="viewport" content="initial-scale=1.0, user-scalable=no" />
+<meta http-equiv="content-type" content="text/html; charset=UTF-8"/>
+<title>Google Maps - pygmaps </title>
+<script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?libraries=visualization&sensor=true_or_false"></script>
+<script type="text/javascript">
+	function initialize() {
+		var centerlatlng = new google.maps.LatLng(0.000000, 0.000000);
+		var myOptions = {
+			zoom: 3,
+			center: centerlatlng,
+			mapTypeId: google.maps.MapTypeId.ROADMAP
+		};
+		var map = new google.maps.Map(document.getElementById("map_canvas"), myOptions);
+
+var heatmap_points = [
+new google.maps.LatLng(37.562500, -122.000400),
+new google.maps.LatLng(32.778700, -96.821800),
+new google.maps.LatLng(36.653400, -78.375000),
+new google.maps.LatLng(31.500000, 34.750000),
+new google.maps.LatLng(37.562500, -122.000400),
+new google.maps.LatLng(33.748500, -84.387100),
+];
+
+var pointArray = new google.maps.MVCArray(heatmap_points);
+var heatmap;
+heatmap = new google.maps.visualization.HeatmapLayer({
+
+data: pointArray
+});
+heatmap.setMap(map);
+heatmap.set('threshold', 10);
+heatmap.set('radius', 10);
+heatmap.set('opacity', 0.600000);
+heatmap.set('dissipating', true);
+	}
+</script>
+</head>
+<body style="margin:0px; padding:0px;" onload="initialize()">
+	<div id="map_canvas" style="width: 100%; height: 100%;"></div>
+</body>
+</html>
+	</body>
+</html>
