@@ -2,27 +2,22 @@
 import gmplot 
 import os
 
-def draw_map(coordinate_list:list): 
+def draw_map(locations:dict): 
    """
    Based on information in , draw map
    :args: 
-      coordinate_list:list: list of corrdeinates 
+      locations:dict dictionary of IPs with locatioons
    :param: 
      map_lat:list - latitude list 
      map_long:list - longtitude list 
    """ 
    map_file = os.path.expanduser(os.path.expandvars('$HOME/map-location-by-ip/images/tmp_map.html')) 
-   #try: 
-   #   open(map_file, 'w').close() 
-   #except Exception as e: 
-   #   print('Failed to create file %s [Error: %s]' % (map_file, e))
-   #   return False 
 
    map_lat = [] 
    map_long = [] 
-   for coor in coordinate_list: 
-      map_lat.append(float(coor.split('(')[-1].split(',')[0]))
-      map_long.append(float(coor.split(',')[-1].split(')')[0]))
+   for ip in locations: 
+      map_lat.append(float(locations[ip]['location'].split('(')[-1].split(',')[0]))
+      map_long.append(float(locations[ip]['location'].split(',')[-1].split(')')[0]))
 
    # Generate Map of the world 
    try: 

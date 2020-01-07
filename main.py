@@ -35,14 +35,15 @@ def main():
       if ip not in ip_dict: 
          ip_dict[ip] = {'address': get_address(ip), 'location': get_log_lat(ip)}
 
-   location = [] 
-   for ip in ip_dict: 
-      location.append(ip_dict[ip]['location'])
-
-   map_file = draw_map(location)
+   map_file = draw_map(ip_dict)
    if not map_file: 
       exit(1) 
-   print(map_file) 
+
+   file_name = write_info(ip_dict) 
+   if not file_name: 
+      exit(1)
+
+   print(file_name) 
 
 if __name__ == '__main__': 
     main()
