@@ -15,7 +15,7 @@ def write_info(locations:dict):
    """
    file_name = '$HOME//map-location-by-ip/images/%s.world_map_heatmap.html' % datetime.datetime.now().strftime('%Y_%m_%d_%H_%M_%S')
    full_file_name = os.path.expanduser(os.path.expandvars(file_name))
-   write_to_file = "\t\t<p align=left><b>%s</b> - %s</p>\n"
+   write_to_file = "\t<p align=left><b>%s</b> - %s</p>\n"
    status_code = True  
 
   # Create file + write init info 
@@ -23,8 +23,7 @@ def write_info(locations:dict):
       with open(full_file_name, 'w') as f: 
          try: 
             f.write(("<html> \n"
-                   +"\t<body> \n"
-                   +"\t\t<h1 align=\"center\">Heatmap based on IPs</h1>\n"
+                   +"\t<h1 align=\"center\">Heatmap based on IPs</h1>\n"
             )) 
          except Exception as e: 
             print('Failed to write init code into file %s [Error: %s]' % (file_name, e))
@@ -48,6 +47,7 @@ def write_info(locations:dict):
             status_code = False 
 
    # write closing 
+   """
    if status_code: 
       try: 
          with open(full_file_name, 'a') as f: 
@@ -61,7 +61,7 @@ def write_info(locations:dict):
       except Exception as e: 
          print('Failed to open file %s [Error: %s]' % (file_name, e))
          status_code = False 
-
+   """
    # rerename if failed 
    if not status_code: 
        try: 

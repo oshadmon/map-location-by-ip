@@ -25,6 +25,44 @@ def read_file(ip_list_file:str):
 
    return ip_list 
 
+def merge_files(map_file:str, file_name:str): 
+   try: 
+      with open(map_file, 'r') as rmf: 
+         try: 
+            map_file_lines = rmf.readlines()[1:]
+         except Exception as e: 
+            print('Failed to read lines from %s [Error: %s]' % (map_file, e)) 
+            return False 
+   except Exception as e: 
+      print('Failed to open file %s [Error: %s]' % (map_file, e))
+      return False 
+   
+   try: 
+      with open(file_name, 'a') as afn: 
+         for line in map_file_lines: 
+            try: 
+               afn.write(line)
+            except Exception as e: 
+               print('Failed to write line %s into file %s [Error: %s]' % (line, file_name, e))
+               return False 
+   except exception as e: 
+      print('Failed to open file %s for write [Error: %s]' % (file_name, e)) 
+      return False 
+
+   # write closing 
+   try: 
+      with open(file_name, 'a') as f: 
+         try: 
+            f.write(("\t</body>\n"
+                    +"</html>"
+            )) 
+         except Exception as e: 
+            print('Failed to write init code into file %s [Error: %s]' % (file_name, e))
+            return False 
+   except Exception as e: 
+      print('Failed to open file %s [Error: %s]' % (file_name, e))
+      return False 
+
 def main(): 
    ip_dict = {} 
    ip_list_file = os.path.expanduser(os.path.expandvars('$HOME/map-location-by-ip/sample_ips.txt')) 
@@ -43,7 +81,7 @@ def main():
    if not file_name: 
       exit(1)
 
-   print(file_name) 
+   merge_files(map_file, file_name) 
 
 if __name__ == '__main__': 
     main()
